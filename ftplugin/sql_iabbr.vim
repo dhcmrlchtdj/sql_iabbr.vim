@@ -26,8 +26,10 @@ if exists("b:did_sql_iabbr")
 endif
 let b:did_sql_iabbr = 1
 
+" undo
+inoremap <silent> <buffer> <C-X>u <C-W><C-R>=b:UndoBuffer<CR><C-V><Space>
+
 function! SqlIab_ReplaceConditionally(original, replacement)
-	echo a:original
 	" only replace outside of comments or strings (which map to constant)
 	let elesyn = synIDtrans(synID(line("."), col(".") - 1, 0))
 	if elesyn != hlID('Comment') && elesyn != hlID('Constant')
@@ -39,7 +41,6 @@ function! SqlIab_ReplaceConditionally(original, replacement)
 	return word
 endfunction
 
-inoremap <silent> <buffer> <C-X>u <C-W><C-R>=b:UndoBuffer<CR><C-V><Space>
 
 " from http://dev.mysql.com/doc/mysqld-version-reference/en/mysqld-version-reference-reservedwords-5-7.html
 let b:replace_pair = {
@@ -278,5 +279,5 @@ let b:replace_pair = {
 			\}
 
 for [orig, repl] in items(b:replace_pair)
-	inoreabbrev <silent> <buffer> orig <C-R>=SqlIab_ReplaceConditionally(orig, repl)<CR>
+	exe "inorea <silent> <buffer> ".orig." <C-R>=SqlIab_ReplaceConditionally('".orig."', '".repl."')<CR>"
 endfor
