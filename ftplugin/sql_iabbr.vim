@@ -276,6 +276,11 @@ let b:replace_pair = {
 			\"xor": "XOR",
 			\"year_month": "YEAR_MONTH",
 			\"zerofill": "ZEROFILL",
+			\"auto_increment": "AUTO_INCREMENT",
+			\"datetime": "DATETIME",
+			\"date": "DATE",
+			\"time": "TIME",
+			\"timestamp": "TIMESTAMP",
 			\}
 
 for [orig, repl] in items(b:replace_pair)
