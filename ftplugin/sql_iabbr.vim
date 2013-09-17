@@ -281,6 +281,7 @@ let b:replace_pair = {
 			\"date": "DATE",
 			\"time": "TIME",
 			\"timestamp": "TIMESTAMP",
+			\"text": "text",
 			\}
 
 for [orig, repl] in items(b:replace_pair)
